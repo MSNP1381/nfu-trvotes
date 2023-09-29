@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/nfu-trvotes/static/css/main.775fb4ed.css",
+    "main.js": "/nfu-trvotes/static/js/main.036c1424.js",
+    "index.html": "/nfu-trvotes/index.html",
+    "main.775fb4ed.css.map": "/nfu-trvotes/static/css/main.775fb4ed.css.map",
+    "main.036c1424.js.map": "/nfu-trvotes/static/js/main.036c1424.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.775fb4ed.css",
+    "static/js/main.036c1424.js"
+  ]
+}
