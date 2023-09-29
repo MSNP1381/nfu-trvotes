@@ -1,0 +1,9 @@
+{
+    "html-css-class-completion.includeGlobPattern": "node_modules/antd-css-utilities/utility.min.css",
+    "html-css-class-completion.CSSLanguages": [
+
+        "css",
+        "sass",
+        "scss"
+    ]
+}

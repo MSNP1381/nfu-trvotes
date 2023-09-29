@@ -1,0 +1,10 @@
+.striped tbody tr:nth-child(odd) {
+    background: #fafafa; 
+  }
+  
+  .striped tbody tr:nth-child(even) {
+    background: #fff;
+  }
+.striped :hover{
+  cursor: pointer;
+}
