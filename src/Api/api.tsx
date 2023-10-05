@@ -1,5 +1,6 @@
 import axios from "axios";
-export const base_url = "https://localhost:7027/";
+// export const base_url = "https://localhost:7027/";
+export const base_url = "https://majles.iran.liara.run/";
 export const get_sessions=(from: string, to: string) => axios.get(base_url + `api/TrVotes?from=${from}&to=${to}`);
 export const get_session=(id:string) => axios.get(base_url + `api/TrVotes/GetSession?sessionId=${id}`);
 export const get_member=(id:string) => axios.get(base_url + `api/TrVotes/GetMember?memId=${id}`);

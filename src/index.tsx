@@ -3,8 +3,7 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import { ConfigProvider } from "antd";
-import 'antd-css-utilities/utility.min.css';
-
+import fa_IR from "antd/es/locale/fa_IR"; 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
@@ -12,7 +11,7 @@ const root = ReactDOM.createRoot(
 
 
 root.render(
-  <ConfigProvider direction="rtl">
+  <ConfigProvider  locale={fa_IR} direction="rtl">
     <App/>
   </ConfigProvider>
 );

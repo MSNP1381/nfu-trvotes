@@ -1,5 +1,9 @@
 import { HeadDataType } from "../MemberPage";
-import { get_memberImage, green as green_, red as red_ } from "../../../Api/api";
+import {
+  get_memberImage,
+  green as green_,
+  red as red_,
+} from "../../../Api/api";
 import { Image, Row, Typography, Col, Statistic } from "antd";
 import Title from "antd/lib/typography/Title";
 import { blue, green, gray, red, yellow } from "@ant-design/colors";
@@ -16,6 +20,11 @@ export default function MemberPageHeadComponent({
   votesCount,
   activities,
 }: HeadDataType) {
+  const all_votes_cnt =
+    activities?.abstaining +
+    activities?.against +
+    activities?.favor +
+    activities?.non_participant;
   const plotConfig = {
     data: votesCount ?? [],
     xField: "date",
@@ -33,8 +42,8 @@ export default function MemberPageHeadComponent({
   };
   return (
     <Row>
-      <Col span={3} className="flex justify-center">
-        <Image  src={get_memberImage(memId)} placeholder/>
+      <Col span={3} style={{display:"flex",justifyContent:"center"}}>
+        {memId && <Image src={get_memberImage(memId)} placeholder />}
       </Col>
       <Col span={14}>
         <Row className="flex flex-col">
@@ -44,6 +53,7 @@ export default function MemberPageHeadComponent({
         <Row>
           <Col flex="auto">
             <Statistic
+            prefix={all_votes_cnt+" /"}
               valueStyle={{ color: gray.primary }}
               title={"اولین شفاف سازی"}
               value={jFirstVote}
@@ -51,6 +61,8 @@ export default function MemberPageHeadComponent({
           </Col>
           <Col flex="auto">
             <Statistic
+            prefix={all_votes_cnt+" /"}
+
               valueStyle={{ color: green.primary }}
               title={"تعداد آرای موافق"}
               value={activities?.favor}
@@ -58,6 +70,8 @@ export default function MemberPageHeadComponent({
           </Col>
           <Col flex="auto">
             <Statistic
+            prefix={all_votes_cnt+" /"}
+
               valueStyle={{ color: blue.primary }}
               title={"تعداد آرای ممتنع"}
               value={activities?.abstaining}
@@ -65,6 +79,8 @@ export default function MemberPageHeadComponent({
           </Col>
           <Col flex="auto">
             <Statistic
+            prefix={all_votes_cnt+" /"}
+
               valueStyle={{ color: red.primary }}
               title={"تعداد آرای مخالف"}
               value={activities?.against}
@@ -72,6 +88,8 @@ export default function MemberPageHeadComponent({
           </Col>
           <Col flex="auto">
             <Statistic
+            prefix={all_votes_cnt+" /"}
+
               valueStyle={{ color: yellow.primary }}
               title={"تعداد عدم مشارکت"}
               value={activities?.non_participant}
@@ -81,7 +99,7 @@ export default function MemberPageHeadComponent({
       </Col>
       <Col span={7}>
         <Area
-         style={{maxHeight:200}}
+          style={{ maxHeight: 200 }}
           autoFit={true}
           animation
           annotations={[
@@ -99,9 +117,9 @@ export default function MemberPageHeadComponent({
               position: [jFirstVote, "max"],
               content: "زمان الحاق به شفافیت",
               offsetY: 50,
-              offsetX:2,
+              offsetX: 2,
               style: {
-                textAlign:"left",
+                textAlign: "left",
               },
             },
           ]}

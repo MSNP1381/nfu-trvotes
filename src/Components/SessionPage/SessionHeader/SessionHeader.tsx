@@ -1,4 +1,3 @@
-import React from "react";
 import { HeadDataType } from "../SessionPage";
 import { Card, Col, Row, Space, Statistic, Typography } from "antd";
 
@@ -16,7 +15,7 @@ function HeadCard({ title, value, color = "black" }: any) {
 export default function SessionHeaderComponent(props: HeadDataType) {
   return (
     <div>
-      <Row className="pb-8 pt-3 text-center">
+      <Row  justify={"center"} gutter={[16, 24]}>
         <Col span={24}>
           <Statistic
           style={{textAlign:"center"}}
@@ -26,22 +25,26 @@ export default function SessionHeaderComponent(props: HeadDataType) {
               justifyContent: "center",
             }}
             title={"عنوان"}
-            value={props.title}
+            value={props.title==''?"":props.title}
             
           />
         </Col>
       </Row>
 
-      <Row className="pb-4 text-center" >
+      <Row justify={"center"} gutter={8}  >
         <Col span={6}>
           <Statistic
-            valueStyle={{ color: gray.primary }}
+          style={{textAlign:"center"}}
+        
+            valueStyle={{ color: gray.primary,}}
             title={"تاریخ"}
             value={props.jdate}
           />
         </Col>
         <Col span={6}>
           <Statistic
+          style={{textAlign:"center"}}
+
             valueStyle={{ color: green.primary }}
             title={"رای موافق"}
             value={props.favor}
@@ -49,6 +52,8 @@ export default function SessionHeaderComponent(props: HeadDataType) {
         </Col>
         <Col span={6}>
           <Statistic
+          style={{textAlign:"center"}}
+
             valueStyle={{ color: red.primary }}
             title={"رای مخالف"}
             value={props.against}
@@ -56,6 +61,8 @@ export default function SessionHeaderComponent(props: HeadDataType) {
         </Col>
         <Col span={6}>
           <Statistic
+          style={{textAlign:"center"}}
+
             valueStyle={{ color: blue.primary }}
             title={"رای ممتنع"}
             value={props.abstaining}

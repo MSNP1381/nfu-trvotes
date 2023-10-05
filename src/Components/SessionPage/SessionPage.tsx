@@ -3,7 +3,7 @@ import { Table, TablePaginationConfig, Tag } from "antd";
 import { ColumnsType } from "antd/es/table";
 import { getColor, get_memberImage, get_session } from "../../Api/api";
 import { useNavigate, useParams } from "react-router-dom";
-import jMoment from "jalali-moment";
+import moment from "jalali-moment";
 import { blue, green, gray, red, yellow } from "@ant-design/colors";
 import "../MainTable/style.css";
 import { type } from "os";
@@ -30,9 +30,9 @@ export type HeadDataType = {
 };
 export default function SessionPageComponent() {
   const get_date_percent = (x: string) => {
-    const base_from = jMoment("1401/12/21", "jYYYY/jMM/jDD").valueOf();
-    const base_to = jMoment(x, "jYYYY/jMM/jDD").valueOf();
-    const now = jMoment().valueOf();
+    const base_from = moment("1401/12/21", "jYYYY/jMM/jDD").valueOf();
+    const base_to = moment(x, "jYYYY/jMM/jDD").valueOf();
+    const now = moment().valueOf();
     if (x == "1402/02/10")
       console.log((base_to - base_from) / (now - base_from));
 
@@ -76,7 +76,7 @@ export default function SessionPageComponent() {
         let color_ = undefined;
         if (value == "ممتنع") color_ = "blue";
         if (value == "موافق") color_ = "green";
-        if (value == "غیبت") color_ = "gray";
+        if (value == "عدم حضور") color_ = "gray";
         if (value == "مخالف") color_ = "red";
         if (value == "عدم مشارکت") color_ = "yellow";
         return (
@@ -101,8 +101,8 @@ export default function SessionPageComponent() {
           value: "مخالف",
         },
         {
-          text: "غیبت",
-          value: "غیبت",
+          text: "عدم حضور",
+          value: "عدم حضور",
         },
         {
           text: "عدم مشارکت",

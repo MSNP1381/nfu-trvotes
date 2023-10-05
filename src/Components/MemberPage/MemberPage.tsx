@@ -10,7 +10,6 @@ import {
 import { ColumnsType } from "antd/es/table";
 import { Table, Tag } from "antd";
 import "../MainTable/style.css";
-import { Area } from "@ant-design/plots";
 import MemberPageHeadComponent from "./MemberPageHead/MemberPageHead";
 
 export type HeadDataType = {
@@ -21,7 +20,7 @@ export type HeadDataType = {
   memId: string;
   imageUrl: string;
   votesCount: Array<FirstVoteType>;
-  activities?: Activity;
+  activities: Activity;
 };
 export type Activity = {
   against: number | 0;
@@ -59,7 +58,7 @@ const columns: ColumnsType<DataType> = [
       let color_ = undefined;
       if (value == "ممتنع") color_ = "blue";
       if (value == "موافق") color_ = "green";
-      if (value == "غیبت") color_ = "gray";
+      if (value == "عدم حضور") color_ = "gray";
       if (value == "مخالف") color_ = "red";
       if (value == "عدم مشارکت") color_ = "yellow";
       return (
@@ -84,8 +83,8 @@ const columns: ColumnsType<DataType> = [
         value: "مخالف",
       },
       {
-        text: "غیبت",
-        value: "غیبت",
+        text: "عدم حضور",
+        value: "عدم حضور",
       },
       {
         text: "عدم مشارکت",
@@ -208,7 +207,11 @@ export default function MemberPageComponent() {
   return (
     <div>
       <div>
-       {memberData.votesCount? <MemberPageHeadComponent {...memberData}></MemberPageHeadComponent>:""}
+        {memberData.votesCount ? (
+          <MemberPageHeadComponent {...memberData}></MemberPageHeadComponent>
+        ) : (
+          ""
+        )}
       </div>
       <Table
         rowKey={"memId"}
