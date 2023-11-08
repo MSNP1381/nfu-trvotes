@@ -4,6 +4,7 @@ import moment from "jalali-moment";
 import { Input, Table } from "antd";
 import { ColumnsType } from "antd/es/table";
 import "./style.css";
+import dayjs from "dayjs";
 import { useNavigate } from "react-router-dom";
 import MainTableFiltersComponent, {
   FilterType,
@@ -70,8 +71,11 @@ export default function MainTableComponent(props: IProps) {
       title: "تاریخ",
       dataIndex: "jdate",
       defaultSortOrder: "descend",
-      sorter: (a, b) =>
-        parseInt(a.jdate.replace("/", "")) - parseInt(b.jdate.replace("/", "")),
+      sorter: (a, b) =>{
+        if (a.jdate>b.jdate) return 1;
+        if (a.jdate==b.jdate)return 0;
+        return -1;
+      }
     },
     {
       title: "تعداد آرا",
@@ -81,42 +85,60 @@ export default function MainTableComponent(props: IProps) {
         record.abstaining + record.against + record.favor,
     },
   ];
+
+  const doFilterData = (x?: FilterType) => {
+    let fil = filters;
+    if (!(x == null || x == undefined)) fil = x;
+    console.log(fil);
+    let d2 = data.filter((w) => {
+      // let d = moment(w.jdate, "jYYYY/jMM/jDD").valueOf();
+      let d = w.jdate;
+
+      let tmp = [
+        fil.title == "" ? true : w.title.includes(fil.title),
+        fil.startDate == "" ? true : fil.startDate <= d,
+        fil.endDate == "" ? true : fil.endDate >= d,
+      ];
+      // console.log( tmp, filters,d);
+      return tmp[0] && tmp[1] && tmp[2];
+    });
+    console.log(d2);
+    setFData(d2);
+  };
   useEffect(() => {
     const base_from = moment("1401/12/21", "jYYYY/jMM/jDD").toISOString();
-
     get_sessions(base_from, moment().toISOString()).then((x) => {
       setData(x.data);
+      setFilters({
+        title: "",
+        startDate: base_date,
+        endDate: n,
+      });
+      doFilterData({
+        title: "",
+        startDate: base_date,
+        endDate: n,
+      });
     });
     console.log(base_from);
   }, []);
 
   const [data, setData] = useState(new Array<DataType>());
   const [fdata, setFData] = useState(new Array<DataType>());
+
+  let base_date = "1401/12/21";
+  const now_ = moment().format("jYYYY/jMM/jDD");
+  let n = now_;
   const [filters, setFilters] = useState({
     title: "",
-    startDate: -1,
-    endDate: -1,
+    startDate: base_date,
+    endDate: n,
   } as FilterType);
 
   useEffect(() => {
-    console.log(filters);
-    let d2 = data.filter((w) => {
-      let d = moment(w.jdate, "jYYYY/jMM/jDD").valueOf();
-
-      let tmp =
-        [filters.title == ""
-          ? true
-          : w.title.includes(filters.title) , filters.startDate <= 0
-          ? true
-          : filters.startDate >= d , filters.endDate <= 0
-          ? true
-          : filters.endDate <= d];
-          console.log(w,tmp,tmp[0]&&tmp[1]&&tmp[2])
-      return tmp[0]&&tmp[1]&&tmp[2];
-    });
-    console.log(d2);
-    setFData(d2);
+    doFilterData();
   }, [filters]);
+
   return (
     <div>
       <MainTableFiltersComponent

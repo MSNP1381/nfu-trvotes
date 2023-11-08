@@ -7,7 +7,7 @@ import {
 import { Image, Row, Typography, Col, Statistic } from "antd";
 import Title from "antd/lib/typography/Title";
 import { blue, green, gray, red, yellow } from "@ant-design/colors";
-import { Area } from "@ant-design/plots";
+import { Area, Pie } from "@ant-design/plots";
 
 const { Text, Link } = Typography;
 export default function MemberPageHeadComponent({
@@ -24,7 +24,55 @@ export default function MemberPageHeadComponent({
     activities?.abstaining +
     activities?.against +
     activities?.favor +
-    activities?.non_participant;
+    activities?.non_participant +
+    activities.absence;
+  const data = [
+    {
+      type: "آرای موافق",
+      value: activities?.favor,
+      color: green.primary,
+      position: "right",
+    },
+    {
+      type: "آرای ممتنع",
+      value: activities?.abstaining,
+      color: yellow.primary,
+    },
+    {
+      type: "آرای مخالف",
+      value: activities?.against,
+      color: red.primary,
+    },
+    {
+      type: "عدم مشارکت",
+      value: activities?.non_participant,
+      color: blue.primary,
+    },
+    {
+      type: "عدم حضور",
+      value: activities?.absence,
+      color: gray.primary,
+    },
+  ];
+  const config = {
+    appendPadding: 10,
+    data,
+    angleField: "value",
+    colorField: "type",
+    radius: 0.8,
+    label: {
+      type: "outer",
+    },
+    theme:{
+    colors10:[
+      green.primary,yellow.primary,red.primary, blue.primary,gray.primary,
+    ]},
+    interactions: [
+      {
+        type: "element-active",
+      },
+    ],
+  };
   const plotConfig = {
     data: votesCount ?? [],
     xField: "date",
@@ -42,7 +90,7 @@ export default function MemberPageHeadComponent({
   };
   return (
     <Row>
-      <Col span={3} style={{display:"flex",justifyContent:"center"}}>
+      <Col span={3} style={{ display: "flex", justifyContent: "center" }}>
         {memId && <Image src={get_memberImage(memId)} placeholder />}
       </Col>
       <Col span={14}>
@@ -50,10 +98,9 @@ export default function MemberPageHeadComponent({
           <Title level={3}>{"نام :" + name + " " + family}</Title>
           <Title level={4}>{"حوزه انتخابیه: " + region}</Title>
         </Row>
-        <Row>
+        <Row gutter={[16, 16]}>
           <Col flex="auto">
             <Statistic
-            prefix={all_votes_cnt+" /"}
               valueStyle={{ color: gray.primary }}
               title={"اولین شفاف سازی"}
               value={jFirstVote}
@@ -61,38 +108,9 @@ export default function MemberPageHeadComponent({
           </Col>
           <Col flex="auto">
             <Statistic
-            prefix={all_votes_cnt+" /"}
-
               valueStyle={{ color: green.primary }}
-              title={"تعداد آرای موافق"}
-              value={activities?.favor}
-            />
-          </Col>
-          <Col flex="auto">
-            <Statistic
-            prefix={all_votes_cnt+" /"}
-
-              valueStyle={{ color: blue.primary }}
-              title={"تعداد آرای ممتنع"}
-              value={activities?.abstaining}
-            />
-          </Col>
-          <Col flex="auto">
-            <Statistic
-            prefix={all_votes_cnt+" /"}
-
-              valueStyle={{ color: red.primary }}
-              title={"تعداد آرای مخالف"}
-              value={activities?.against}
-            />
-          </Col>
-          <Col flex="auto">
-            <Statistic
-            prefix={all_votes_cnt+" /"}
-
-              valueStyle={{ color: yellow.primary }}
-              title={"تعداد عدم مشارکت"}
-              value={activities?.non_participant}
+              title={"تعداد کل آرا"}
+              value={all_votes_cnt}
             />
           </Col>
         </Row>
@@ -126,6 +144,9 @@ export default function MemberPageHeadComponent({
           {...plotConfig}
           loading={!(votesCount && votesCount.length > 0)}
         />
+      </Col>
+      <Col flex={"auto"}>
+        <Pie {...config} />
       </Col>
     </Row>
   );

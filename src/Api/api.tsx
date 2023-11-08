@@ -6,6 +6,7 @@ export const get_session=(id:string) => axios.get(base_url + `api/TrVotes/GetSes
 export const get_member=(id:string) => axios.get(base_url + `api/TrVotes/GetMember?memId=${id}`);
 export const get_firstVotes=() => axios.get(base_url + `api/TrVotes/GetFirstVotesCount`);
 export const get_memberImage=(id:string) =>`${base_url}api/TrVotes/GetMemberImage/${id}`
+export const get_all_members=() =>axios.get(`${base_url}api/TrVotes/GetAllMembersWithVotes`);
 export const red='#820014'
 export const green='#52c41a'
 export function getColor  (percent: any)  {

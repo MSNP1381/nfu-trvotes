@@ -1,16 +1,9 @@
 import { HeadDataType } from "../SessionPage";
 import { Card, Col, Row, Space, Statistic, Typography } from "antd";
-
 import { blue, green, gray, red, yellow } from "@ant-design/colors";
 
 const { Text, Link } = Typography;
-function HeadCard({ title, value, color = "black" }: any) {
-  return (
-    <Card title={title}>
-      <Text type={color}>{value}</Text>
-    </Card>
-  );
-}
+
 
 export default function SessionHeaderComponent(props: HeadDataType) {
   return (

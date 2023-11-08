@@ -28,16 +28,17 @@ export type HeadDataType = {
   jdate: string;
   date: string;
 };
-export default function SessionPageComponent() {
-  const get_date_percent = (x: string) => {
-    const base_from = moment("1401/12/21", "jYYYY/jMM/jDD").valueOf();
-    const base_to = moment(x, "jYYYY/jMM/jDD").valueOf();
-    const now = moment().valueOf();
-    if (x == "1402/02/10")
-      console.log((base_to - base_from) / (now - base_from));
+export function get_date_percent (x: string) {
+  const base_from = moment("1401/12/21", "jYYYY/jMM/jDD").valueOf();
+  const base_to = moment(x, "jYYYY/jMM/jDD").valueOf();
+  const now = moment().valueOf();
+  if (x == "1402/02/10")
+    console.log((base_to - base_from) / (now - base_from));
 
-    return (base_to - base_from) / (now - base_from);
-  };
+  return (base_to - base_from) / (now - base_from);
+}
+export default function SessionPageComponent() {
+
   const columns: ColumnsType<DataType> = [
     {
       title: "",
@@ -74,9 +75,9 @@ export default function SessionPageComponent() {
       key: "activityName",
       render: (value, record, index) => {
         let color_ = undefined;
-        if (value == "ممتنع") color_ = "blue";
+        if (value == "ممتنع") color_ = "gray";
         if (value == "موافق") color_ = "green";
-        if (value == "عدم حضور") color_ = "gray";
+        if (value == "عدم حضور") color_ = "blue";
         if (value == "مخالف") color_ = "red";
         if (value == "عدم مشارکت") color_ = "yellow";
         return (

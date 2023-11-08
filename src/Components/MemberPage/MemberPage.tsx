@@ -27,6 +27,7 @@ export type Activity = {
   favor: number | 0;
   abstaining: number | 0;
   non_participant: number | 0;
+  absence:number|0;
 };
 type DataType = {
   id: number;
@@ -84,7 +85,7 @@ const columns: ColumnsType<DataType> = [
       },
       {
         text: "عدم حضور",
-        value: "عدم حضور",
+        value: "غیبت",
       },
       {
         text: "عدم مشارکت",
@@ -170,11 +171,13 @@ export default function MemberPageComponent() {
       let non_participant = 0;
       let against = 0;
       let abstaining = 0;
+      let absence = 0;
 
       d.forEach((e) => {
         if (e.activityName == "ممتنع") abstaining += 1;
         else if (e.activityName == "مخالف") against += 1;
         else if (e.activityName == "موافق") favor += 1;
+        else if (e.activity ==1 ) absence += 1;
         else non_participant += 1;
       });
 
@@ -190,6 +193,7 @@ export default function MemberPageComponent() {
           abstaining,
           against,
           non_participant,
+          absence
         },
         votesCount: memberData.votesCount ?? [],
       });
