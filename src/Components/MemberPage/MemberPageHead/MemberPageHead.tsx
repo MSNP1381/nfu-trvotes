@@ -91,7 +91,7 @@ export default function MemberPageHeadComponent({
   return (
     <Row>
       <Col span={3} style={{ display: "flex", justifyContent: "center" }}>
-        {memId && <Image src={get_memberImage(memId)} placeholder />}
+        {memId && <Image src={memId?get_memberImage(memId):"https://placehold.co/200"} placeholder />}
       </Col>
       <Col span={14}>
         <Row className="flex flex-col">

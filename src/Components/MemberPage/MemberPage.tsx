@@ -184,7 +184,7 @@ export default function MemberPageComponent() {
       setMemberData({
         family: x.data.family,
         name: x.data.name,
-        memId: x.data.memId,
+        memId: x.data.majCode,
         region: x.data.region,
         imageUrl: x.data.imageUrl,
         jFirstVote: x.data.jFirstVote,

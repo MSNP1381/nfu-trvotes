@@ -143,7 +143,7 @@ export default function SessionPageComponent() {
 
       let d: DataType[] = x.data.votes.map((u: any) => {
         return {
-          memId: u.member.memId,
+          memId: u.member.majCode,
           name: u.member.name,
           family: u.member.family,
           region: u.member.region,

@@ -10,7 +10,7 @@ type DataType = {
   family: string;
   region: string;
   jFirstVote: string;
-  memId: string;
+  majCode: string;
   imageUrl: string;
   absence: number;
   nonParticipation: number;
@@ -26,7 +26,7 @@ const columns: ColumnsType<DataType> = [
     key: "imageUrl",
     render: (value, record, index) => (
       <img
-        src={get_memberImage(record.memId)}
+        src={record.majCode?get_memberImage(record.majCode):"https://placehold.co/200"}
         width={"60px"}
         alt={record.name + " " + record.family}
       />
@@ -209,7 +209,7 @@ export default function AllMembersComponent() {
         rowKey={"id"}
         onRow={(record, rowIndex) => {
           return {
-            onClick: (event) => navigate("/member/" + record.memId),
+            onClick: (event) => navigate("/member/" + record.majCode  ),
           };
         }}
       />
