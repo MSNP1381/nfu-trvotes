@@ -7,11 +7,9 @@
     "@ant-design/plots": "^1.2.5",
     "@types/react": "^17.0.2",
     "@types/react-dom": "^17.0.2",
-    "antd": "^4.18.9",
+    "antd": "^5.12.5",
     "axios": "^1.5.0",
-    "dayjs": "^1.11.10",
     "jalali-moment": "^3.3.8",
-    "jalaliday": "^2.3.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.17.0",
@@ -44,13 +42,6 @@
     ]
   },
   "devDependencies": {
-    "@types/customize-cra": "^1.0.5",
-    "babel-plugin-import": "^1.13.8",
-    "babel-plugin-syntax-dynamic-import": "^6.18.0",
-    "customize-cra": "^1.0.0",
-    "react-app-rewired": "^2.2.1",
-    "webpack": "^5.88.2",
-    "webpack-cli": "^5.1.4",
-    "webpack-dev-server": "^4.15.1"
+
   }
 }

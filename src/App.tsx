@@ -1,24 +1,14 @@
 import MainTableComponent from "./Components/MainTable/MainTable";
-import "antd/dist/antd.min.css";
-import { ConfigProvider, Layout } from "antd";
-import fa_IR from "antd/es/locale/fa_IR";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import {  Layout } from "antd";
 import SessionPageComponent from "./Components/SessionPage/SessionPage";
 import MemberPageComponent from "./Components/MemberPage/MemberPage";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import dayjs from "dayjs";
-import jalaliday from "jalaliday";
 import AllMembersComponent from "./Components/AllMembers/AllMembers";
-import { Content, Footer } from "antd/lib/layout/layout";
-import Link from "antd/lib/typography/Link";
-var calendar = require("dayjs/plugin/calendar");
-dayjs.extend(calendar);
-dayjs.extend(jalaliday);
-dayjs().calendar("jalali");
+import { Content, Footer } from "antd/es/layout/layout";
+import Link from "antd/es/typography/Link";
+
 export default function App() {
-  dayjs.extend(calendar);
-  dayjs.extend(jalaliday);
-  dayjs().calendar("jalali");
+
   const router = createBrowserRouter([
     { path : "/", element: <MainTableComponent /> },
     { path : "/session/:id", element: <SessionPageComponent /> },
